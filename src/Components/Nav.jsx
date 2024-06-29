@@ -8,11 +8,8 @@ const Nav = () => {
                 <h1>Captain's Log</h1>
             </Link>
             <ul>
-                <Link>
-                    <li>Add Crew-member</li>
-                </Link>
-                <Link>
-                    <li>Edit Crew-member</li>
+                <Link to='/new'>
+                    <li>New Member</li>
                 </Link>
                 <Link>
                     <li>About</li>

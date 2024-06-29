@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 
 const Show = () => {
     const { index } = useParams();
@@ -54,6 +55,11 @@ const Show = () => {
         <>
             <h1>Show Page</h1>
             {showGenerator()}
+            <button>Back</button>
+            <Link to={`/${index}/edit`}>
+                <button>Edit</button>
+            </Link>
+            <button>Delete</button>
         </>
     );
 };
