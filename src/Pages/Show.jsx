@@ -1,11 +1,13 @@
 import React, { useState, useEffect } from 'react';
-import { useParams } from 'react-router-dom';
+import { useParams, useNavigate } from 'react-router-dom';
 import { Link } from 'react-router-dom';
 
 const Show = () => {
     const { index } = useParams();
+    const navigate = useNavigate();
     const [log, setLog] = useState(null);
     const [errorStatus, setErrorStatus] = useState(false);
+    const API = import.meta.env.VITE_BASE_URL;
 
     useEffect(() => {
         fetch(`http://localhost:3033/personel/${index}`)
@@ -51,6 +53,25 @@ const Show = () => {
         }
     }
 
+    const handleDelete = () => {
+        fetch(`${API}/${index}`, {
+            method: 'DELETE'
+        })
+        .then(res => {
+            if (!res.ok) {
+                throw Error('Fetch failed');
+            } else {
+                return res.json();
+            }
+        })
+        .then(data => {
+            navigate('/');
+        })
+        .catch(error => {
+            console.error(error.message);
+        })
+    }
+
     return (
         <>
             <h1>Show Page</h1>
@@ -59,7 +80,7 @@ const Show = () => {
             <Link to={`/${index}/edit`}>
                 <button>Edit</button>
             </Link>
-            <button>Delete</button>
+            <button onClick={handleDelete}>Delete</button>
         </>
     );
 };
